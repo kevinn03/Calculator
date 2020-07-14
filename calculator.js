@@ -70,11 +70,19 @@ function logop(){
         
     if(answer.length === 3){
         let result = operator(answer[0], answer[1], answer[2]);
-        
+        result = Number(result);
+        if(Number.isInteger(result)){
+
+        }
+        else{
+            result = result.toFixed(2);
+        }
         answer = [];
-        answer.push(Number(result), this.textContent);
+
+        answer.push(result, this.textContent);
         show = result;
         screen.textContent = show;
+        toggleOff();
         
     }else{
    
@@ -97,10 +105,18 @@ function operator(first, sign, second){
         
             if(sign === (" * ")){
                 resy = multiply(first, second);
+                resy = Number(resy);
+                if(Number.isInteger(resy)){
+
+                }
+                else{
+                    resy = resy.toFixed(2);
+                }
                 answer = [];
-                answer.push(Number(resy));
+                answer.push(resy);
                 show = resy;
                 screen.textContent = show;
+                toggleOn();
                 expression = "";
                 return resy;
             }
@@ -109,10 +125,18 @@ function operator(first, sign, second){
             else if(sign === (" / ")){
                 
                  resy = divide(first, second);
+                 resy = Number(resy);
+                 if(Number.isInteger(resy)){
+
+                 }
+                 else{
+                     resy = resy.toFixed(2);
+                 }
                  answer = [];
-                 answer.push(Number(resy));
+                 answer.push(resy);
                  show = resy;
                  screen.textContent = show;
+                 toggleOn();
                  expression = "";
                  return resy;    
                 
@@ -121,10 +145,18 @@ function operator(first, sign, second){
             else if(sign === (" + ")){
                 
                  resy = add(first, second);
+                 resy = Number(resy);
+                 if(Number.isInteger(resy)){
+
+                 }
+                 else{
+                     resy = resy.toFixed(2);
+                 }
                  answer = [];
-                 answer.push(Number(resy));
+                 answer.push(resy);
                  show = resy;
                  screen.textContent = show;
+                 toggleOn();
                  expression = "";
                  return resy;
             
@@ -134,10 +166,18 @@ function operator(first, sign, second){
             else if(sign === (" - ")){
                 
                  resy = subtract(first, second);
+                 resy = Number(resy);
+                 if(Number.isInteger(resy)){
+
+                 }
+                 else{
+                     resy = resy.toFixed(2);
+                 }
                  answer = [];
-                 answer.push(Number(resy));
+                 answer.push(resy);
                  show = resy;
                  screen.textContent = show;
+                 toggleOn();
                  expression = "";
                  return resy;
             } 
@@ -148,32 +188,22 @@ function operator(first, sign, second){
     
 }
 
-/*
-function solution(result){
-    if(result === Infinity || result === -Infinity){
-        let tmp = expression.split(" / ");
-        expression = tmp[0];
-        screen.textContent = expression;
-    }
-    else{
-    let solu = result;
-    
+
+
+function toggleOn(){
     screen.classList.add("active");
-    screen.textContent = solu;
-    expression = solu;
-    }
-    
-
-
-
 }
-*/
+
+function toggleOff(){
+    screen.classList.remove("active");
+}
 
 function refresh(){
+    answer = [];
     expression = "";
     show = "";
     screen.textContent = show;
-    screen.classList.remove("active");
+    toggleOff();
 }
 
 
@@ -188,7 +218,7 @@ function display(){
     
     
     screen.textContent = show;
-    screen.classList.remove("active");
+    toggleOff();
 }
 
 function populate(){
