@@ -1,4 +1,6 @@
+let show = "";
 let expression = "";
+let answer = [];
 const screen = document.querySelector(".display");
 
 window.onload = function(){
@@ -38,9 +40,15 @@ return total;
 function divide(...num){
     let total = num[0];
     for (let index = 1; index < num.length; index++) {
-        if (num[index] === 0){return alert("not allowed!")}
-        total /= num[index];
+        if (num[index] === 0){
+            
+            alert("Not allowed to dive by zero!")
+            
+        }
         
+        total /= num[index];
+            
+
     }
 return total;
 }
@@ -54,65 +62,132 @@ function helpSpread(arr){
     return res;
 }
 
-function operator(){
-    let op = expression;
+function logop(){
+    if(expression !== ""){
+    answer.push(Number(expression));}
+   
     
-    if(op.includes(" * ")){
-        let temp = op.split("*");
-        let res = helpSpread(temp);
-        solution(multiply(...res));
-    }
+        
+    if(answer.length === 3){
+        let result = operator(answer[0], answer[1], answer[2]);
+        
+        answer = [];
+        answer.push(Number(result), this.textContent);
+        show = result;
+        screen.textContent = show;
+        
+    }else{
+   
+    answer.push(this.textContent);
     
-
-    else if(op.includes(" / ")){
-        let temp = op.split("/");
-        let res = helpSpread(temp);
-        solution(divide(...res));
-    }
     
-    else if(op.includes(" + ")){
-        let temp = op.split("+");
-        let res = helpSpread(temp);
-        solution(add(...res));
     }
-    
-    else if(op.includes(" - ")){
-        let temp = op.split(" - ");
-        let res = helpSpread(temp);
-        solution(subtract(...res));
-    }
-    else {
-
-    }
+    console.log(expression);
+    show = "";
+    expression = "";
 }
 
+function operator(first, sign, second){
+   if(answer.length < 3){answer.push(Number(expression));}
+    
+            first = answer[0];
+        sign = answer[1];
+        second = answer[2]
+        let resy;
+        
+            if(sign === (" * ")){
+                resy = multiply(first, second);
+                answer = [];
+                answer.push(Number(resy));
+                show = resy;
+                screen.textContent = show;
+                expression = "";
+                return resy;
+            }
+            
 
+            else if(sign === (" / ")){
+                
+                 resy = divide(first, second);
+                 answer = [];
+                 answer.push(Number(resy));
+                 show = resy;
+                 screen.textContent = show;
+                 expression = "";
+                 return resy;    
+                
+                }
+
+            else if(sign === (" + ")){
+                
+                 resy = add(first, second);
+                 answer = [];
+                 answer.push(Number(resy));
+                 show = resy;
+                 screen.textContent = show;
+                 expression = "";
+                 return resy;
+            
+                } 
+
+            
+            else if(sign === (" - ")){
+                
+                 resy = subtract(first, second);
+                 answer = [];
+                 answer.push(Number(resy));
+                 show = resy;
+                 screen.textContent = show;
+                 expression = "";
+                 return resy;
+            } 
+
+            else {
+
+            }
+    
+}
+
+/*
 function solution(result){
+    if(result === Infinity || result === -Infinity){
+        let tmp = expression.split(" / ");
+        expression = tmp[0];
+        screen.textContent = expression;
+    }
+    else{
     let solu = result;
     
     screen.classList.add("active");
     screen.textContent = solu;
     expression = solu;
-    
+    }
     
 
 
 
 }
+*/
 
 function refresh(){
     expression = "";
-    screen.textContent = expression;
+    show = "";
+    screen.textContent = show;
     screen.classList.remove("active");
 }
 
 
 function display(){
-    
-    expression += this.textContent;
     console.log(expression);
     
-    screen.textContent += this.textContent;
+    show += this.textContent;
+    expression += this.textContent;
+    
+    console.log(show);
+    console.log(answer);
+    
+    
+    screen.textContent = show;
     screen.classList.remove("active");
 }
 
@@ -128,6 +203,11 @@ function populate(){
 
     let clear = document.querySelector(".clear");
     clear.addEventListener("click", refresh);
+
+    let oper = document.querySelectorAll(".op");
+    oper.forEach(function(ele){
+        ele.addEventListener("click", logop);
+    })
 
 }
 
