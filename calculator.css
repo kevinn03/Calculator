@@ -1,0 +1,54 @@
+
+body{
+    width: 700px;
+    height: 700px;
+    margin: auto;
+}
+.main{
+    
+    border: 7px solid grey;
+    border-radius: 25px;
+    width: 500px;
+    height: auto;
+    margin: auto;
+    margin-top: 100px;
+    background-color: rgb(177, 68, 68);
+}
+
+.header {
+    text-align: center;
+}
+
+
+
+.btn {
+    height: 700px;
+    width: 450px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-auto-rows: 100px;
+    margin: auto;
+    margin-top: 100px;
+    
+}
+
+button{
+    height: 60px;
+    width: 80px;
+    margin: auto;
+    border-radius: 10px;
+    border: 3px solid blue;
+}
+    .display {
+    margin: auto;
+    font-size: 50px;
+    width: 450px;
+    height: 60px;
+    border: 3px solid black;
+    text-align: right;
+    margin-top: 55px;
+}   
+
+.op{
+    background-color: rgb(0, 153, 255);
+}
