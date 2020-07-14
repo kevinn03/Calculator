@@ -1,7 +1,7 @@
 
 body{
-    width: 700px;
-    height: 700px;
+    width: 960px;
+    height: 960px;
     margin: auto;
 }
 .main{
@@ -9,7 +9,7 @@ body{
     border: 7px solid grey;
     border-radius: 25px;
     width: 500px;
-    height: auto;
+    height: 700px;
     margin: auto;
     margin-top: 100px;
     background-color: rgba(54, 53, 53, 0.952);
@@ -51,7 +51,11 @@ button{
     text-align: left;
     margin-top: 55px;
     color: white;
-}   
+}  
+
+    .active {
+        text-align: right;
+    }
 
 .op{
     background-color: rgb(0, 153, 255);

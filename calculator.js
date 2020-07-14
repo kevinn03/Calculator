@@ -1,4 +1,6 @@
 let expression = "";
+const screen = document.querySelector(".display");
+
 window.onload = function(){
     populate();
 }
@@ -43,34 +45,52 @@ function divide(...num){
 return total;
 }
 
+function helpSpread(arr){
+    let res = [];
+        for (let index = 0; index < arr.length; index++) {
+            res.push(Number(arr[index]));
+            
+        }
+    return res;
+}
+
 function operator(){
     let op = expression;
-
-    if(op.includes("*")){
-        let temp = op.split("*");
-        solution(multiply(Number(temp[0]), Number(temp[1])));
-    }
-    else if(op.includes("+")){
-        let temp = op.split("+");
-        solution(add(Number(temp[0]), Number(temp[1])));
-    }
-
-    else if(op.includes("/")){
-        let temp = op.split("/");
-        solution(divide(temp[0], temp[1]));
-    }
-   
     
-    else{
-        let temp = op.split("--");
-        solution(subtract(temp[0], temp[1]));
+    if(op.includes(" * ")){
+        let temp = op.split("*");
+        let res = helpSpread(temp);
+        solution(multiply(...res));
+    }
+    
+
+    else if(op.includes(" / ")){
+        let temp = op.split("/");
+        let res = helpSpread(temp);
+        solution(divide(...res));
+    }
+    
+    else if(op.includes(" + ")){
+        let temp = op.split("+");
+        let res = helpSpread(temp);
+        solution(add(...res));
+    }
+    
+    else if(op.includes(" - ")){
+        let temp = op.split(" - ");
+        let res = helpSpread(temp);
+        solution(subtract(...res));
+    }
+    else {
+
     }
 }
 
 
 function solution(result){
     let solu = result;
-    let screen = document.querySelector(".display");
+    
+    screen.classList.add("active");
     screen.textContent = solu;
     expression = solu;
     
@@ -79,11 +99,21 @@ function solution(result){
 
 
 }
+
+function refresh(){
+    expression = "";
+    screen.textContent = expression;
+    screen.classList.remove("active");
+}
+
+
 function display(){
+    
     expression += this.textContent;
     console.log(expression);
-    let screen = document.querySelector(".display");
+    
     screen.textContent += this.textContent;
+    screen.classList.remove("active");
 }
 
 function populate(){
@@ -91,7 +121,13 @@ function populate(){
     buttons.forEach(function(ele){
         ele.addEventListener("click", display);
     })
+
+   
     let equal = document.querySelector(".equal");
     equal.addEventListener("click", operator);
 
+    let clear = document.querySelector(".clear");
+    clear.addEventListener("click", refresh);
+
 }
+
