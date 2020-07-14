@@ -53,14 +53,7 @@ function divide(...num){
 return total;
 }
 
-function helpSpread(arr){
-    let res = [];
-        for (let index = 0; index < arr.length; index++) {
-            res.push(Number(arr[index]));
-            
-        }
-    return res;
-}
+
 
 function logop(){
     if(expression !== ""){
@@ -82,6 +75,7 @@ function logop(){
         answer.push(result, this.textContent);
         show = result;
         screen.textContent = show;
+        
         toggleOff();
         
     }else{
@@ -95,7 +89,24 @@ function logop(){
     expression = "";
 }
 
+function helperOp(resy){
+    if(Number.isInteger(resy)){
+
+    }
+    else{
+        resy = resy.toFixed(2);
+    }
+    answer = [];
+    answer.push(resy);
+    show = resy;
+    screen.textContent = show;
+    toggleOn();
+    expression = "";
+    show = "";
+}
+
 function operator(first, sign, second){
+    if(expression === ""){return;}
    if(answer.length < 3){answer.push(Number(expression));}
     
             first = answer[0];
@@ -106,18 +117,7 @@ function operator(first, sign, second){
             if(sign === (" * ")){
                 resy = multiply(first, second);
                 resy = Number(resy);
-                if(Number.isInteger(resy)){
-
-                }
-                else{
-                    resy = resy.toFixed(2);
-                }
-                answer = [];
-                answer.push(resy);
-                show = resy;
-                screen.textContent = show;
-                toggleOn();
-                expression = "";
+                helperOp(resy);
                 return resy;
             }
             
@@ -126,19 +126,8 @@ function operator(first, sign, second){
                 
                  resy = divide(first, second);
                  resy = Number(resy);
-                 if(Number.isInteger(resy)){
-
-                 }
-                 else{
-                     resy = resy.toFixed(2);
-                 }
-                 answer = [];
-                 answer.push(resy);
-                 show = resy;
-                 screen.textContent = show;
-                 toggleOn();
-                 expression = "";
-                 return resy;    
+                 helperOp(resy);
+                 return resy;   
                 
                 }
 
@@ -146,18 +135,7 @@ function operator(first, sign, second){
                 
                  resy = add(first, second);
                  resy = Number(resy);
-                 if(Number.isInteger(resy)){
-
-                 }
-                 else{
-                     resy = resy.toFixed(2);
-                 }
-                 answer = [];
-                 answer.push(resy);
-                 show = resy;
-                 screen.textContent = show;
-                 toggleOn();
-                 expression = "";
+                 helperOp(resy);
                  return resy;
             
                 } 
@@ -167,18 +145,7 @@ function operator(first, sign, second){
                 
                  resy = subtract(first, second);
                  resy = Number(resy);
-                 if(Number.isInteger(resy)){
-
-                 }
-                 else{
-                     resy = resy.toFixed(2);
-                 }
-                 answer = [];
-                 answer.push(resy);
-                 show = resy;
-                 screen.textContent = show;
-                 toggleOn();
-                 expression = "";
+                 helperOp(resy);
                  return resy;
             } 
 
@@ -208,6 +175,7 @@ function refresh(){
 
 
 function display(){
+    
     console.log(expression);
     
     show += this.textContent;
